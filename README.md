@@ -2,6 +2,9 @@
 Google Cloud Landing Zone using Java IaC
 
 # Developer Guide
+- Refer to https://cloud.google.com/java/docs/reference
+- https://cloud.google.com/storage/docs/reference/libraries#client-libraries-install-java
+- https://github.com/googleapis/google-cloud-java
 ## Create your bootstrap Google Cloud project
 ```
 michael@cloudshell:~$ gcloud projects create gcp-zone-landing-stg --name="gcp-zone-landing-stg" --labels=type=dev
