@@ -8,6 +8,15 @@ Google Cloud Landing Zone using Java IaC
 
 # Running the CLI
 ```
+with dependencies (recommended)
+michaelobrien@mbp7 gcp-landing-zone-deploy % mvn compile assembly:single 
+(4 min on GCP Shell, 2 min on an M1 max pro)
+michaelobrien@mbp7 gcp-landing-zone-deploy % java -jar target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT-jar-with-dependencies.jar zone.gcp.landing.Cli
+Binding: {"members":["user:mic...ev"],"role":"roles/logging.logWriter"}
+Role: roles/logging.logWriter
+Members: [user:m..ev] 
+
+without dependencies
 michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone (lz-stg)$ mvn clean install -U
 michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone (lz-stg)$ java -jar gcp-landing-zone-deploy/target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT.jar zone.gcp.landing.Cli
 S
