@@ -54,3 +54,18 @@ michael@cloudshell:~ (lz-stg)$ gcloud services enable compute.googleapis.com
 Operation "operations/acf.p2-918623670639-494fcadb-4df0-43e9-b778-835bea73645b" finished successfully.
 ```
 
+## Add the GCP SDK to your maven project
+- examples:  https://cloud.google.com/docs/samples/?q=enable+service&l=java
+- Add the dependency in your pom
+- https://github.com/googleapis/google-cloud-java/tree/monorepo_script_output/java-service-control
+- https://cloud.google.com/iam/docs/samples/iam-quickstart#iam_quickstart-java
+- https://github.com/GoogleCloudPlatform/java-docs-samples/blob/HEAD/iam/api-client/src/main/java/iam/snippets/Quickstart.java
+```
+<dependency>
+  <groupId>com.google.cloud</groupId>
+  <artifactId>google-cloud-service-control</artifactId>
+  <version>1.3.0</version>
+</dependency
+```
+
+
