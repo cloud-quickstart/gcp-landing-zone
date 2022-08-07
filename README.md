@@ -174,6 +174,17 @@ Buckets:
 Bucket{name=empty-lz-stg}
 Bucket{name=empty2-lz-ob}
 
+
+shell
+ mvn compile assembly:single
+[INFO] Building jar: /home/michael/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy/target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:08 min
+
+macbook pro 2021 m1max
+[INFO] Total time:  02:32 min
 ```
 
 
