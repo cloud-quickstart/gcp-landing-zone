@@ -19,13 +19,31 @@ limitations under the License.
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>zone.gcp.landing</groupId>
-    <artifactId>gcp-landing-zone-root</artifactId>
+    <artifactId>gcp-landing-zone-deploy</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gcp-landing-zone-root</name>
-    <description>gcp-landing-zone root project</description>
-    <packaging>pom</packaging>
+    <name>gcp-landing-zone-deploy</name>
+    <description>gcp-landing-zone deploy</description>
+    <packaging>jar</packaging>
+    <parent>
+		<groupId>zone.gcp.landing</groupId>
+		<artifactId>gcp-landing-zone-root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+	</parent>
     <build>
       <plugins>
+           <plugin> 
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <mainClass>zone.gcp.landing.Cli</mainClass>
+
+                    </manifest>
+                  </archive>
+                </configuration>
+        </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -37,8 +55,14 @@ limitations under the License.
       </plugin>
      </plugins>
     </build>
-
-    <modules>
-      <module>gcp-landing-zone-deploy</module>
-    </modules>
+      <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+    <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.0</version>
+    </dependency>
+  </dependencies>
 </project>

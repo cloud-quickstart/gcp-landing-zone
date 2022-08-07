@@ -2,6 +2,9 @@
 *.class
 target/
 
+# gcp
+.theia/
+
 # Log file
 *.log
 
