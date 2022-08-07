@@ -37,6 +37,7 @@ limitations under the License.
       </plugin>
      </plugins>
     </build>
+
     <!--modules>
       <module>gcp-landing-zone-deploy</module>
     </modules-->
