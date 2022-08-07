@@ -47,3 +47,10 @@ NAME: storage-api.googleapis.com
 NAME: storage-component.googleapis.com
 NAME: storage.googleapis.com
 ```
+
+Enable compute for VPC creation
+```
+michael@cloudshell:~ (lz-stg)$ gcloud services enable compute.googleapis.com
+Operation "operations/acf.p2-918623670639-494fcadb-4df0-43e9-b778-835bea73645b" finished successfully.
+```
+
