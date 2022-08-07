@@ -68,4 +68,112 @@ Operation "operations/acf.p2-918623670639-494fcadb-4df0-43e9-b778-835bea73645b" 
 </dependency
 ```
 
+## Authenticate
+
+```
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ gcloud auth application-default login
+
+You are running on a Google Compute Engine virtual machine.
+The service credentials associated with this virtual machine
+will automatically be used by Application Default
+Credentials, so it is not necessary to use this command.
+
+If you decide to proceed anyway, your user credentials may be visible
+to others with access to this virtual machine. Are you sure you want
+to authenticate with your personal account?
+
+Do you want to continue (Y/n)?  y
+
+Go to the following link in your browser:
+
+    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fapplicationdefaultauthcode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&state=BgyTC4dzisSlh2PqZT3bJAU2rnKypa&prompt=consent&access_type=offline&code_challenge=U-KYvn2xVXbirxYw336968B1Z8g_dbkrrT-HgMD9yvA&code_challenge_method=S256
+
+Enter authorization code: 4/0AdQt8qisZgiAFnmCM2OAkoZFjhJwEPitvFkOeCZSKT_z-Awg_v5feYtyx7QtOogCYxIiWA
+
+Credentials saved to file: [/tmp/tmp.IX6qLvhyOT/application_default_credentials.json]
+
+These credentials will be used by any library that requests Application Default Credentials (ADC).
+
+Quota project "lz-stg" was added to ADC which can be used by Google client libraries for billing and quota. Note that some services may still bill the project owning the resource.
+
+still (missing parent pom dependency)
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ java -jar target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT.jar zone.gcp.landing.Cli
+Error: Unable to initialize main class zone.gcp.landing.Cli
+Caused by: java.lang.NoClassDefFoundError: com/google/auth/Credentials
+
+enable resource manager
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ gcloud services list --available | grep resource
+NAME: cloudresourcemanager.googleapis.com
+
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ gcloud services enable cloudresourcemanager.googleapis.com
+Operation "operations/acat.p2-918623670639-be41bc89-506f-4176-8152-bd39b5cd2d86" finished successfully.
+
+https://cloud.google.com/docs/authentication/getting-started#auth-cloud-implicit-java
+
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ cp /tmp/tmp.IX6qLvhyOT/application_default_credentials.json ~/
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ export GOOGLE_APPLICATION_CREDENTIALS=~/application_default_credentials.json
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ java -jar target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT.jar zone.gcp.landing.Cli
+
+
+pom.xml change
+<build>
+      <plugins>
+           <plugin> 
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <!--artifactId>maven-jar-plugin</artifactId-->
+                <version>3.1.0</version>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <mainClass>zone.gcp.landing.Cli</mainClass>
+
+                    </manifest>
+                  </archive>
+                  <!-- fix java.lang.NoClassDefFoundError: com/google/auth/Credentials-->
+                  <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                <!-- single jar-->
+        <execution>
+          <id>make-assembly</id> <!-- this is used for inheritance merges -->
+          <phase>package</phase> <!-- bind to the packaging phase -->
+          <goals>
+            <goal>single</goal>
+          </goals>
+        </execution>
+      </executions>
+        </plugin>
+      <!--plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
+      </plugin-->
+     </plugins>
+    </build>
+    
+    [INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  04:30 min
+[INFO] Finished at: 2022-08-07T18:29:24Z
+[INFO] ------------------------------------------------------------------------
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ mvn clean compile assembly:single
+
+my problem was the build - been a while since I worked outside of a spring boot jar - where we need all dependencies packaged into the jar
+
+michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone/gcp-landing-zone-deploy (lz-stg)$ java -jar target/gcp-landing-zone-deploy-0.0.1-SNAPSHOT-jar-with-dependencies.jar zone.gcp.landing.Cli
+classloading
+Buckets:
+Bucket{name=empty-lz-stg}
+Bucket{name=empty2-lz-ob}
+
+```
+
 
