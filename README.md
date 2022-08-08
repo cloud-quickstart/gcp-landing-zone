@@ -37,6 +37,8 @@ michael@cloudshell:~/cloud-quickstart$ gcloud config set project gcp-zone-landin
 michael@cloudshell:~/cloud-quickstart (gcp-zone-landing-stg)$
 ```
 
+
+
 Get default enabled services
 ```
 michael@cloudshell:~/cloud-quickstart (gcp-zone-landing-stg)$ gcloud services list --enabled --project gcp-zone-landing-stg | grep NAME
@@ -56,6 +58,33 @@ NAME: storage-api.googleapis.com
 NAME: storage-component.googleapis.com
 NAME: storage.googleapis.com
 ```
+Get project, organization and billing id
+```
+gcloud config set project lz-stg
+export PROJ=$(gcloud config list --format 'value(core.project)') 
+export ORGANIZATION_ID=$(gcloud projects get-ancestors $PROJECT_ID --format='get(id)' | tail -1)
+export BILLING_ID=$(gcloud alpha billing projects describe $PROJECT_ID '--format=value(billingAccountName)' | sed 's/.*\///')
+# add iam role
+gcloud organizations add-iam-policy-binding $ORGANIZATION_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.folderAdmin
+# create folder and save the id
+# https://cloud.google.com/resource-manager/docs/creating-managing-folders#gcloud
+export FOLDER_ROOT_0=$(gcloud resource-manager folders create --display-name=landingzone --organization=$ORGANIZATION_ID '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_1=$(gcloud resource-manager folders create --display-name=Infrastructure --folder=$FOLDER_ROOT_0 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_2=$(gcloud resource-manager folders create --display-name=Networking --folder=$FOLDER_ROOT_1 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_3=$(gcloud resource-manager folders create --display-name=ProdNetworking --folder=$FOLDER_ROOT_2 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_WORK_1=$(gcloud resource-manager folders create --display-name=Workloads --folder=$FOLDER_ROOT_0 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_WORK_2=$(gcloud resource-manager folders create --display-name=Prod --folder=$FOLDER_WORK_1 '--format=value(name)' | sed 's/.*\///')
+
+export PROJECT_PERIMETER=odpe-obd-obdprd-obdpubper
+export PROJECT_PRODHOST=odpe-obd-obdprd-obdhostproj
+export PROJECT_PRODSERV1=odpe-obd-obdprd-obdservprj1
+gcloud projects create $PROJECT_PERIMETER --folder=$FOLDER_ROOT_3
+gcloud projects create $PROJECT_PRODHOST --folder=$FOLDER_ROOT_3
+gcloud projects create $PROJECT_PRODSERV1 --folder=$FOLDER_WORK_2
+
+https://cloud.google.com/resource-manager/docs/creating-managing-projects
+```
+
 
 Enable compute for VPC creation
 ```
