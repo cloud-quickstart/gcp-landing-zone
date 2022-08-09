@@ -92,6 +92,9 @@ ERROR: (gcloud.beta.billing.projects.link) FAILED_PRECONDITION: Precondition che
 # use another billing account
 export BILLING_ID=019D0C...
 gcloud beta billing projects link  odpe-obd-obdprd-obdpubper --billing-account=$BILLING_ID
+gcloud beta billing projects link odpe-obd-obdprd-obdservprj1 --billing-account=$BILLING_ID
+gcloud beta billing projects link  odpe-obd-obdprd-obdhostproj --billing-account=$BILLING_ID
+
 
 
 https://cloud.google.com/resource-manager/docs/creating-managing-projects
