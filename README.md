@@ -249,3 +249,8 @@ macbook pro 2021 m1max
 
 ### constraints/gcp.resourceLocations = list ["northamerica-northeast1", "northamerica-northeast2"]
 
+## Projects
+
+## IAM Roles
+### Super Admin User
+#### org level cloudasset.assets.searchAllResources for Cloud Asset Inventory
