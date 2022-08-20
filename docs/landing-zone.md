@@ -28,10 +28,54 @@ graph LR;
     sbx-->checklist.gcp.zone-->experiment
     prd-->landing.gcp.zone-->resilient/stable
     uat-->gcp.zone-->cicd/automated
+    gcp.zone-->gcp-domain-zone
     
     
 ```
 
 ## Manual Landing Zone Flight Plan
+
+### Create new Google Cloud Identity Account with Domain/Organization and Billing
+#### Open an incognito Chrome window
+#### Navigate to Google Cloud Identity Free Account Creation
+
+follow https://cloud.google.com/identity/docs/set-up-cloud-identity-admin and select Cloud Identity Free https://workspace.google.com/signup/gcpidentity/welcome#0
+
+#### Select single business user
+
+#### Use same business name as subdomain - approach.gcp.zone
+
+#### Use base email from the hosting domain - gcp.zone
+
+#### Select name for the super admin
+
+#### Select username for the super admin
+
+#### Create Google Account
+
+#### Goto Setup
+There is a very small chance your account will get flagged.
+
+#### Use a phone for requested MFA
+
+#### Domain verification in admin.google.com
+
+#### Switch to hosting account - gcp.zone
+
+#### Apply TXT record
+
+#### Check dig domain txt
+
+#### Return to verify domain
+
+#### 2 min - Setup GCP Cloud Console Now
+
+#### Optionally - Move Billing Accounts or Projects
+
+#### Non-Government - Activate Credits - to enter Billing CC
+Periodically you may incur a 48h wait when using the same billing info.
+
+
+
 
 ## Automated Landing Zone Flight Plan
