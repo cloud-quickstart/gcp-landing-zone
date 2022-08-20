@@ -27,7 +27,7 @@ graph LR;
     automated-->prd
     
     prem-->onprem.gcp.zone
-    idp-->obrienlabs.dev
+    idp-->azure.obrienlabs.dev
     dev-->approach.gcp.zone-->procedure/verify
     sbx-->checklist.gcp.zone-->experiment
     prd-->landing.gcp.zone-->resilient/stable
