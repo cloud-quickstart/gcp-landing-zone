@@ -75,7 +75,33 @@ There is a very small chance your account will get flagged.
 #### Non-Government - Activate Credits - to enter Billing CC
 Periodically you may incur a 48h wait when using the same billing info.
 
+#### Create new Chrome window and Profile
+
+#### Navigate to IAM - check organization
+
+https://console.cloud.google.com/iam-admin/iam?organizationId=431498985862
+
+#### Check billing
+
+https://console.cloud.google.com/billing?organizationId=431498985862
+
+30 min for a verify check this time
+
+#### Switch/Enable billing on default project
+
+#### Activate to enable all services
+
+#### Activate shell.cloud.google.com
+
+#### Increase Project Quotas
+
+https://support.google.com/code/contact/billing_quota_increase
+
 
 
 
 ## Automated Landing Zone Flight Plan
+
+
+# Links
+- Request more users than 50 or 100 (workspaces) https://cloud.google.com/identity/pricing
