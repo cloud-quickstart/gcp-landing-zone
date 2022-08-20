@@ -19,11 +19,15 @@ graph LR;
     style Landing-Zones fill:#44f,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
     %% mapped and documented
 
+    on-prem-simulate-->prem
+    identity-as-a-service-simulate-->idp
     manual-->sbx
     manual-->dev
     automated-->uat
     automated-->prd
     
+    prem-->onprem.gcp.zone
+    idp-->obrienlabs.dev
     dev-->approach.gcp.zone-->procedure/verify
     sbx-->checklist.gcp.zone-->experiment
     prd-->landing.gcp.zone-->resilient/stable
