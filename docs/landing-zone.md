@@ -172,9 +172,28 @@ https://support.google.com/code/contact/billing_quota_increase
 
 <img width="1567" alt="Screen Shot 2022-08-19 at 22 57 50" src="https://user-images.githubusercontent.com/24765473/185806204-2feab70c-b37d-46d3-9714-cc3b4a4db1d2.png">
 
+### Add IAM Role Permissions - under organization
+- folder admin  
+- project billing manager = roles/billing.projectManager
+- storage admin
+- logging admin
+- security admin
+- Service Account Token Creator (for Terraform service accounts)
 
+<img width="1684" alt="Screen Shot 2022-08-21 at 15 04 07" src="https://user-images.githubusercontent.com/24765473/185806883-9d9e3767-df71-4b34-b309-4458df095ab7.png">
+
+- Service Account Admin
+- Folder Creator = roles/resourcemanager.folderCreator
+- Organization roles/orgpolicy.policyAdmin
+
+### Create Folder structure
+org
+- landingzone
+- 
+<img width="729" alt="Screen Shot 2022-08-21 at 15 06 17" src="https://user-images.githubusercontent.com/24765473/185806962-2dd1e676-9b6d-4632-a756-9a461821e60a.png">
 
 ## Automated Landing Zone Flight Plan
+
 
 
 # Links
