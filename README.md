@@ -265,17 +265,4 @@ macbook pro 2021 m1max
 [INFO] Total time:  02:32 min
 ```
 
-# Incremental Asset Inventory
 
-## Organization Policies
-### constraints/compute.skipDefaultNetworkCreation = true
-
-### constraints/compute.disableSerialPortAccess = true
-
-### constraints/gcp.resourceLocations = list ["northamerica-northeast1", "northamerica-northeast2"]
-
-## Projects
-
-## IAM Roles
-### Super Admin User
-#### org level cloudasset.assets.searchAllResources for Cloud Asset Inventory
