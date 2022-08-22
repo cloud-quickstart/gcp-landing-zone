@@ -42,6 +42,14 @@ graph LR;
     
 ```
 
+
+
+## Automated Landing Zone Flight Plan
+
+
+### Incremental Asset Inventory
+
+
 ## Manual Landing Zone Flight Plan
 
 ### Create new Google Cloud Identity Account with Domain/Organization and Billing
@@ -184,15 +192,54 @@ https://support.google.com/code/contact/billing_quota_increase
 
 - Service Account Admin
 - Folder Creator = roles/resourcemanager.folderCreator
-- Organization roles/orgpolicy.policyAdmin
+- Organization Policy Admin roles/orgpolicy.policyAdmin
 
 ### Create Folder structure
 org
 - landingzone
-- 
+- - 
 <img width="729" alt="Screen Shot 2022-08-21 at 15 06 17" src="https://user-images.githubusercontent.com/24765473/185806962-2dd1e676-9b6d-4632-a756-9a461821e60a.png">
 
-## Automated Landing Zone Flight Plan
+### Create projects
+- lz-agz-stg under landingzone folder
+
+
+## Organization Policies
+- set IAM role organization policy admin
+- 
+### constraints/compute.skipDefaultNetworkCreation = true
+
+### constraints/compute.disableSerialPortAccess = true
+
+### constraints/gcp.resourceLocations = list ["northamerica-northeast1", "northamerica-northeast2"]
+
+https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations
+
+<img width="1057" alt="Screen Shot 2022-08-21 at 21 36 23" src="https://user-images.githubusercontent.com/24765473/185822523-0d169d77-0c18-464b-b9e3-127c75340688.png">
+
+<img width="965" alt="Screen Shot 2022-08-21 at 21 38 12" src="https://user-images.githubusercontent.com/24765473/185822530-f746228c-8314-4475-97fc-1da90d1a26a8.png">
+
+<img width="900" alt="Screen Shot 2022-08-21 at 21 38 24" src="https://user-images.githubusercontent.com/24765473/185822551-a7ec8ac3-0268-4028-9721-5117317e7443.png">
+
+<img width="941" alt="Screen Shot 2022-08-21 at 21 38 37" src="https://user-images.githubusercontent.com/24765473/185822560-a28f735a-59e8-4d74-8c90-7e798626a200.png">
+
+```
+michael@cloudshell:~$ gcloud beta resource-manager org-policies set-policy --organization 962342543445 policy.yaml
+constraint: constraints/gcp.resourceLocations
+etag: CMe_i5gGEKDVkL8D
+listPolicy:
+  allowedValues:
+  - in:northamerica-northeast2-locations
+  - in:northamerica-northeast1-locations
+updateTime: '2022-08-22T01:45:43.937700Z'
+```
+
+## Projects
+
+## IAM Roles
+### Super Admin User
+#### org level cloudasset.assets.searchAllResources for Cloud Asset Inventory
+
 
 
 
