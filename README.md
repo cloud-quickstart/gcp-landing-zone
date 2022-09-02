@@ -43,6 +43,7 @@ michael@cloudshell:~/github/cloud-quickstart/gcp-landing-zone (lz-stg)$ java -ja
 # GCP Quota Increases
 
 # GCP Identity and Organization Onboarding
+https://github.com/GoogleCloudPlatform/pbmm-on-gcp-onboarding/blob/main/docs/google-cloud-onboarding.md
 
 # GCP IAM Roles
  - https://cloud.google.com/iam/docs/granting-changing-revoking-access?_ga=2.162573115.-680483834.1659746082
