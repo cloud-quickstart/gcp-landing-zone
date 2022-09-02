@@ -36,7 +36,8 @@ graph LR;
     dev-aws-->aws.cloudnuage.dev
     sbx-->checklist.gcp.zone-->experiment
     prd-->landing.gcp.zone-->resilient/stable
-    uat-->gcp.zone-->cicd/automated-java
+    uat-->alternate.gcp.zone-->cicd/automated
+    sbx-->gcp.zone-->experiment-java
     gcp.zone-->gcp-domain-zone
     
     
