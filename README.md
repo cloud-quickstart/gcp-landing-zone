@@ -110,7 +110,7 @@ gcloud projects create $PROJECT_PRODHOST --folder=$FOLDER_ROOT_3
 gcloud projects create $PROJECT_PRODSERV1 --folder=$FOLDER_WORK_2
 
 # link billing account
-gcloud beta billing projects link  odpe-obd-obdprd-obdpubper --billing-account=$BILLING_ID
+gcloud beta billing projects link $PROJECT_PERIMETER --billing-account=$BILLING_ID
 ERROR: (gcloud.beta.billing.projects.link) FAILED_PRECONDITION: Precondition check failed.
 - '@type': type.googleapis.com/google.rpc.QuotaFailure
   violations:
@@ -118,9 +118,9 @@ ERROR: (gcloud.beta.billing.projects.link) FAILED_PRECONDITION: Precondition che
     subject: billingAccounts/019283...
 # use another billing account
 export BILLING_ID=019D0C...
-gcloud beta billing projects link  odpe-obd-obdprd-obdpubper --billing-account=$BILLING_ID
-gcloud beta billing projects link odpe-obd-obdprd-obdservprj1 --billing-account=$BILLING_ID
-gcloud beta billing projects link  odpe-obd-obdprd-obdhostproj --billing-account=$BILLING_ID
+gcloud beta billing projects link $PROJECT_PERIMETER --billing-account=$BILLING_ID
+gcloud beta billing projects link $PROJECT_PRODSERV1 --billing-account=$BILLING_ID
+gcloud beta billing projects link $PROJECT_PRODHOST --billing-account=$BILLING_ID
 
 
 
