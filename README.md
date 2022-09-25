@@ -90,6 +90,7 @@ gcloud config set project lz-stg
 export PROJ=$(gcloud config list --format 'value(core.project)') 
 export ORGANIZATION_ID=$(gcloud projects get-ancestors $PROJECT_ID --format='get(id)' | tail -1)
 export BILLING_ID=$(gcloud alpha billing projects describe $PROJECT_ID '--format=value(billingAccountName)' | sed 's/.*\///')
+export USER_EMAIL=`gcloud config list account --format "value(core.account)"`
 # add iam role
 gcloud organizations add-iam-policy-binding $ORGANIZATION_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.folderAdmin
 # create folder and save the id
