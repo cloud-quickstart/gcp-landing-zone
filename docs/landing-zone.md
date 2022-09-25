@@ -182,12 +182,33 @@ https://support.google.com/code/contact/billing_quota_increase
 <img width="1567" alt="Screen Shot 2022-08-19 at 22 57 50" src="https://user-images.githubusercontent.com/24765473/185806204-2feab70c-b37d-46d3-9714-cc3b4a4db1d2.png">
 
 ### Add IAM Role Permissions - under organization
+- project owner (owner)
 - folder admin  
-- project billing manager = roles/billing.projectManager
+- project billing manager = roles/billing.projectManager (will not inherit into billing if the billing account is shared - set manually)
 - storage admin
 - logging admin
 - security admin
 - Service Account Token Creator (for Terraform service accounts)
+
+```
+export PROJECT_ID=lz-rgz
+gcloud projects create $PROJECT_ID --name="$PROJECT_ID" --labels=type=dev
+gcloud config set project lz-rgz
+export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
+export ORG_ID=$(gcloud projects get-ancestors $PROJECT_ID --format='get(id)' | tail -1)
+export BILLING_ID=$(gcloud alpha billing projects describe $PROJECT_ID '--format=value(billingAccountName)' | sed 's/.*\///')
+export USER_EMAIL=`gcloud config list account --format "value(core.account)"`
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.folderAdmin
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/billing.user
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/compute.networkAdmin
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.projectCreator
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.projectDeleter
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/orgpolicy.policyAdmin
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/resourcemanager.projectIamAdmin
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/storage.admin
+gcloud organizations add-iam-policy-binding $ORG_ID --member=user:$USER_EMAIL --role=roles/iam.serviceAccountTokenCreator
+
+```
 
 <img width="1684" alt="Screen Shot 2022-08-21 at 15 04 07" src="https://user-images.githubusercontent.com/24765473/185806883-9d9e3767-df71-4b34-b309-4458df095ab7.png">
 
@@ -196,14 +217,35 @@ https://support.google.com/code/contact/billing_quota_increase
 - Organization Policy Admin roles/orgpolicy.policyAdmin
 
 ### Create Folder structure
+
 org
 - landingzone
 - - 
 <img width="729" alt="Screen Shot 2022-08-21 at 15 06 17" src="https://user-images.githubusercontent.com/24765473/185806962-2dd1e676-9b6d-4632-a756-9a461821e60a.png">
 
+
+```
+export FOLDER_ROOT=$(gcloud resource-manager folders create --display-name=zone1 --organization=$ORG_ID '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_0=$(gcloud resource-manager folders create --display-name=landingzone --folder=$FOLDER_ROOT '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_1=$(gcloud resource-manager folders create --display-name=Infrastructure --folder=$FOLDER_ROOT_0 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_2=$(gcloud resource-manager folders create --display-name=Networking --folder=$FOLDER_ROOT_1 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_ROOT_3=$(gcloud resource-manager folders create --display-name=ProdNetworking --folder=$FOLDER_ROOT_2 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_WORK_1=$(gcloud resource-manager folders create --display-name=Workloads --folder=$FOLDER_ROOT_0 '--format=value(name)' | sed 's/.*\///')
+export FOLDER_WORK_2=$(gcloud resource-manager folders create --display-name=Prod --folder=$FOLDER_WORK_1 '--format=value(name)' | sed 's/.*\///')
+
+```
+
 ### Create projects
 - lz-agz-stg under landingzone folder
 
+```
+export PROJECT_PERIMETER=gzpe-rgz-rgzprd-rgzpubper
+export PROJECT_PRODHOST=gzpe-rgz-rgzprd-rgzhostproj
+export PROJECT_PRODSERV1=gzpe-rgz-rgzprd-rgzservprj1
+gcloud projects create $PROJECT_PERIMETER --folder=$FOLDER_ROOT_3
+gcloud projects create $PROJECT_PRODHOST --folder=$FOLDER_ROOT_3
+gcloud projects create $PROJECT_PRODSERV1 --folder=$FOLDER_WORK_2
+```
 
 ## Organization Policies
 - set IAM role organization policy admin
@@ -225,17 +267,18 @@ https://cloud.google.com/resource-manager/docs/organization-policy/defining-loca
 <img width="941" alt="Screen Shot 2022-08-21 at 21 38 37" src="https://user-images.githubusercontent.com/24765473/185822560-a28f735a-59e8-4d74-8c90-7e798626a200.png">
 
 ```
-michael@cloudshell:~$ gcloud beta resource-manager org-policies set-policy --organization 962342543445 policy.yaml
+gcloud beta resource-manager org-policies set-policy --organization $ORG_ID policy.yaml
 constraint: constraints/gcp.resourceLocations
-etag: CMe_i5gGEKDVkL8D
 listPolicy:
   allowedValues:
   - in:northamerica-northeast2-locations
   - in:northamerica-northeast1-locations
-updateTime: '2022-08-22T01:45:43.937700Z'
+
 ```
 
 ## Projects
+
+
 
 ## IAM Roles
 ### Super Admin User
