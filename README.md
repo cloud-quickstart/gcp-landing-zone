@@ -26,7 +26,10 @@ ID | Domain | D CSP | C CSP | Identity | sa | Phone | MFA | Credits | Use | Quot
 16 | ***gcp.zone*** | | GCP | WS | m | | | 1104 | LZ manual - with n-c.org |
 17 | ***landing.gcp.zone*** | | GCP | | m | | | 1113 | LZ automated CD - with n-c.org |
 
-# Running the CLI
+# Running the gcloud CLI
+```
+```
+# Running the Java CLI
 ```
 with dependencies (recommended)
 michaelobrien@mbp7 gcp-landing-zone-deploy % mvn compile assembly:single 
