@@ -1,5 +1,6 @@
 # gcp-landing-zone
 Google Cloud Landing Zone using Java IaC
+- see https://github.com/CloudLandingZone/gcp-secure-landing-zone-poc/blob/main/README.md
 
 # Developer Guide
 - Refer to https://cloud.google.com/java/docs/reference
