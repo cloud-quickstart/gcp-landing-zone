@@ -2,6 +2,7 @@
 Google Cloud Landing Zone using Java IaC
 - see https://github.com/CloudLandingZone/gcp-secure-landing-zone-poc/blob/main/README.md
 - https://cloud.google.com/iam/docs/samples/iam-quickstart#iam_quickstart-java
+- see https://github.com/GoogleCloudPlatform/pubsec-declarative-toolkit/wiki/DevOps#local-development---manual
 
 # Developer Guide
 - Refer to https://cloud.google.com/java/docs/reference
