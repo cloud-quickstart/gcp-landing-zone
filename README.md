@@ -93,7 +93,7 @@ NAME: storage.googleapis.com
 Get project, organization and billing id
 ```
 gcloud config set project lz-stg
-export PROJ=$(gcloud config list --format 'value(core.project)') 
+export PROJECT_ID=$(gcloud config list --format 'value(core.project)') 
 export ORGANIZATION_ID=$(gcloud projects get-ancestors $PROJECT_ID --format='get(id)' | tail -1)
 export BILLING_ID=$(gcloud alpha billing projects describe $PROJECT_ID '--format=value(billingAccountName)' | sed 's/.*\///')
 export USER_EMAIL=`gcloud config list account --format "value(core.account)"`
