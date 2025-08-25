@@ -73,7 +73,7 @@ michael@cloudshell:~/cloud-quickstart (gcp-zone-landing-stg)$
 
 Get default enabled services
 ```
-michael@cloudshell:~/cloud-quickstart (gcp-zone-landing-stg)$ gcloud services list --enabled --project gcp-zone-landing-stg | grep NAME
+michael@cloudshell:~/cloud-quickstart (gcp-zone-landing-stg)$ gcloud services list --enabled --project gcp-zone-landing-stg
 NAME: bigquery.googleapis.com
 NAME: bigquerymigration.googleapis.com
 NAME: bigquerystorage.googleapis.com
